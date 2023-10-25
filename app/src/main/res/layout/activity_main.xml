@@ -25,7 +25,7 @@
         android:id="@+id/tv_addSignature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_size_8dp"
+        android:layout_marginTop="@dimen/margin_size_12dp"
         android:fontFamily="@font/ltc_globe_gothic_bold"
         android:text="@string/add_signature"
         android:textColor="@color/color_020617"

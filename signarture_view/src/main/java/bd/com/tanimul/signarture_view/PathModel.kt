@@ -1,4 +1,4 @@
-package bd.com.media365.signatureview
+package bd.com.tanimul.signarture_view
 
 import android.graphics.Path
 

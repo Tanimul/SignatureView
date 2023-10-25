@@ -1,19 +1,17 @@
-package bd.com.media365.signatureview
+package bd.com.tanimul.signatureview
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import bd.com.media365.signatureview.databinding.ActivityMainBinding
+import bd.com.tanimul.signarture_view.SignatureView
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private lateinit var signatureView: SignatureView
 
-    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -25,16 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnDone.setOnClickListener {
             saveSignatureImage(signatureView.getSignatureBitmap())
-
         }
 
         binding.ibErase.setOnClickListener {
             signatureView.updateEraseMode()
         }
 
-        val frameLayout = findViewById<FrameLayout>(R.id.frameLayout)
         signatureView = SignatureView(this, null)
-        frameLayout.addView(signatureView)
+        binding.frameLayout.addView(signatureView)
 
 
     }
