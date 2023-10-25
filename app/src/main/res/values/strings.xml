@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Signature View</string>
+    <string name="add_signature">Add Signature</string>
+    <string name="done">Done</string>
 </resources>
