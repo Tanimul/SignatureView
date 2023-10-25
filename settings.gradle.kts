@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Signature View"
 include(":app")
- 
+include(":signarture_view")
