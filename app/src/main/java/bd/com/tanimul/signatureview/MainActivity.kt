@@ -4,8 +4,8 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import bd.com.tanimul.signatureview.databinding.ActivityMainBinding
 import bd.com.tanimul.signarture_view.SignatureView
+import bd.com.tanimul.signatureview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

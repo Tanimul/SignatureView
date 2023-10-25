@@ -1,10 +1,11 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("maven-publish")
 }
 
 android {
-    namespace = "bd.com.media365.signarture_view"
+    namespace = "bd.com.tanimul.signarture_view"
     compileSdk = 33
 
     defaultConfig {
@@ -40,4 +41,15 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+//            from(components["release"])
+            groupId = "com.github.tanimul"
+            artifactId = "material-button"
+            version = "1.0.0"
+        }
+    }
 }
