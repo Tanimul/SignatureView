@@ -4,12 +4,12 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-
 class SignatureView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     private val paths =
@@ -51,6 +51,7 @@ class SignatureView(context: Context, attrs: AttributeSet?) : View(context, attr
     }
 
     override fun onDraw(canvas: Canvas) {
+
         for (pathWithMode in paths) {
             paint.color = if (pathWithMode.isErasing) Color.WHITE else Color.BLACK
             paint.strokeWidth = if (pathWithMode.isErasing) 20f else 5f
@@ -108,17 +109,49 @@ class SignatureView(context: Context, attrs: AttributeSet?) : View(context, attr
     }
 
     fun getSignatureBitmap(): Bitmap {
-        val signatureBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(signatureBitmap)
+        val originalBitmap = createSignatureBitmap()
+        val rotatedBitmap = rotateBitmap(originalBitmap, -90f)
+
+        // Return the rotated bitmap
+        return rotatedBitmap
+    }
+
+    private fun createSignatureBitmap(): Bitmap {
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+
+        //Set the background color to white
+        canvas.drawColor(Color.parseColor("#F1F5F9"))
+
         for (pathWithMode in paths) {
-            paint.color = if (pathWithMode.isErasing) Color.WHITE else Color.BLACK
+            paint.color = if (pathWithMode.isErasing) Color.parseColor("#F1F5F9") else Color.BLACK
+            paint.strokeWidth = if (pathWithMode.isErasing) 20f else 5f
             canvas.drawPath(pathWithMode.path, paint)
         }
+
         currentPath?.let {
-            paint.color = if (isErasing) Color.WHITE else Color.BLACK
+            paint.color = if (isErasing) Color.parseColor("#F1F5F9") else Color.BLACK
+            paint.strokeWidth = if (isErasing) 20f else 5f
             canvas.drawPath(it.path, paint)
         }
-        return signatureBitmap
+
+        return bitmap
+    }
+
+    private fun rotateBitmap(inputBitmap: Bitmap, degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        val rotatedBitmap = Bitmap.createBitmap(
+            inputBitmap,
+            0,
+            0,
+            inputBitmap.width,
+            inputBitmap.height,
+            matrix,
+            true
+        )
+
+        return rotatedBitmap
     }
 
 
