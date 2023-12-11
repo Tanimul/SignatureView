@@ -110,10 +110,9 @@ class SignatureView(context: Context, attrs: AttributeSet?) : View(context, attr
 
     fun getSignatureBitmap(): Bitmap {
         val originalBitmap = createSignatureBitmap()
-        val rotatedBitmap = rotateBitmap(originalBitmap, -90f)
 
         // Return the rotated bitmap
-        return rotatedBitmap
+        return rotateBitmap(originalBitmap, -90f)
     }
 
     private fun createSignatureBitmap(): Bitmap {
@@ -141,7 +140,8 @@ class SignatureView(context: Context, attrs: AttributeSet?) : View(context, attr
     private fun rotateBitmap(inputBitmap: Bitmap, degrees: Float): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(degrees)
-        val rotatedBitmap = Bitmap.createBitmap(
+
+        return Bitmap.createBitmap(
             inputBitmap,
             0,
             0,
@@ -150,8 +150,6 @@ class SignatureView(context: Context, attrs: AttributeSet?) : View(context, attr
             matrix,
             true
         )
-
-        return rotatedBitmap
     }
 
 
